@@ -39,7 +39,6 @@ print_words() and print_top().
 
 import sys
 from operator import itemgetter
-from stat import filemode
 from string import punctuation
 
 # +++your code here+++
@@ -48,11 +47,12 @@ from string import punctuation
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 def print_words(filename) -> None:
+    """Prints all words in text ad their count"""
     text: list = import_words(filename)
     unsorted_words_list = clean_words(text)
     counted_words = sorted(count_words(unsorted_words_list).items())
     for item in counted_words:
-        print(f'{item[0]}: {item[1]}')
+        print(f'{item[0]} {item[1]}')
 
 
 def print_top(filename):
@@ -60,7 +60,7 @@ def print_top(filename):
     unsorted_words_list = clean_words(text)
     counted_words = sorted(count_words(unsorted_words_list).items(), key=itemgetter(1), reverse=True)
     for i in range(20):
-        print(f'{counted_words[i][0]}: {counted_words[i][1]}')
+        print(f'{counted_words[i][0]} {counted_words[i][1]}')
 
 
 
@@ -75,7 +75,7 @@ def import_words(filename):
 
 
 def clean_words(text):
-    """cleans word from list of words with punctuation"""
+    """cleans word from list of words with punctuation from said punctuation"""
     word_list = []
     for word in text:
         clean_word = ''
@@ -96,27 +96,24 @@ def count_words(word_list):
             word_count[word] += 1
     return word_count
 
-filename = "alice.txt"
-print_top('alice.txt')
-
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
-# def main():
-#     if len(sys.argv) != 3:
-#         print('usage: ./wordcount.py {--count | --topcount} file')
-#         sys.exit(1)
-#
-#     option = sys.argv[1]
-#     filename = sys.argv[2]
-#     if option == '--count':
-#         print_words(filename)
-#     elif option == '--topcount':
-#         print_top(filename)
-#     else:
-#         print('unknown option: ' + option)
-#         sys.exit(1)
+def main():
+    if len(sys.argv) != 3:
+        print('usage: ./wordcount.py {--count | --topcount} file')
+        sys.exit(1)
 
-#
-# if __name__ == '__main__':
-#     main()
+    option = sys.argv[1]
+    filename = sys.argv[2]
+    if option == '--count':
+        print_words(filename)
+    elif option == '--topcount':
+        print_top(filename)
+    else:
+        print('unknown option: ' + option)
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
