@@ -38,61 +38,67 @@ print_words() and print_top().
 """
 
 import sys
-
+from operator import itemgetter
+from stat import filemode
+from string import punctuation
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
-def print_words(filename):
-    pass
+def print_words(filename) -> None:
+    text: list = import_words(filename)
+    unsorted_words_list = clean_words(text)
+    counted_words = sorted(count_words(unsorted_words_list).items())
+    for item in counted_words:
+        print(f'{item[0]}: {item[1]}')
 
 
 def print_top(filename):
-    text = import_lines(filename)
-    words = lines_to_words(text)
-    wordcount = {}
-    for word in words:
-        if word not in wordcount:
-            wordcount[word] = 1
+    text: list = import_words(filename)
+    unsorted_words_list = clean_words(text)
+    counted_words = sorted(count_words(unsorted_words_list).items(), key=itemgetter(1), reverse=True)
+    for i in range(20):
+        print(f'{counted_words[i][0]}: {counted_words[i][1]}')
+
+
+
+
+def import_words(filename):
+    """gets words from text file splitting them at ' ', words need cleaning afterwards"""
+    word_list =[]
+    with open(filename, 'r') as f:
+        text = f.read().split()
+    word_list = clean_words(text)
+    return word_list
+
+
+def clean_words(text):
+    """cleans word from list of words with punctuation"""
+    word_list = []
+    for word in text:
+        clean_word = ''
+        for char in word:
+            if char not in punctuation:
+                clean_word += char.lower()
+        if word != '' and not word.isnumeric():
+            word_list.append(clean_word)
+    return word_list
+
+def count_words(word_list):
+    """count words in list of words"""
+    word_count = {}
+    for word in word_list:
+        if word not in word_count:
+            word_count[word] = 1
         else:
-            wordcount[word] += 1
-    return wordcount
+            word_count[word] += 1
+    return word_count
 
+filename = "alice.txt"
+print_top('alice.txt')
 
-def import_lines(filename):
-    lines = []
-    with open(filename, 'r') as file:
-        reader = file.read()
-        for line in reader.lower().split('\n'):
-            lines.append(line)
-        return lines
-
-
-def lines_to_words(lines):
-    words = []
-    result = []
-    for line in lines:
-        line = line.split(' ')
-        for word in line:
-            words.append(word)
-
-    for word in words:
-        if word.isalpha():
-            result.append(word)
-        else:
-            new_word = ''
-            for char in word:
-                if char.isalpha():
-                    new_word += char
-            result.append(new_word)
-    return result
-
-
-filename = 'small.txt'
-
-print(print_top(filename))
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
