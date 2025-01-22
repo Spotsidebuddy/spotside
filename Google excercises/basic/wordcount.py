@@ -67,7 +67,6 @@ def print_top(filename):
 
 def import_words(filename):
     """gets words from text file splitting them at ' ', words need cleaning afterwards"""
-    word_list =[]
     with open(filename, 'r') as f:
         text = f.read().split()
     word_list = clean_words(text)

@@ -7,7 +7,7 @@ def insert_sort(A):
             k -= 1
 
 
-def choice_sort(A):
+def selection_sort(A):
     n = len(A)
     for pos in range(0, n - 1):
         for k in range(pos + 1, n):
