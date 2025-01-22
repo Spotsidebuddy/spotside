@@ -9,6 +9,7 @@ def print_primes_up_to(n):
             for m in range(2*k, n, k):
                 A[m] = False
     for k in range(n):
-        print(k, '-', 'простое' if A[k] else 'составное')
+        if A[k]:
+            print(k)
 
 print_primes_up_to(2500)
