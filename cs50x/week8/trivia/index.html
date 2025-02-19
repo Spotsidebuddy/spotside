@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let buttons = document.querySelectorAll('.multiple_choice');
+                let res1 = document.querySelector('#res1');
+                let res2 = document.querySelector('#res2');
+                let res3 = document.querySelector('#res3');
+                buttons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        let isCorrect = button.classList.contains('correct');
+                        let result;
+                        if (isCorrect) {
+                            button.style.backgroundColor = 'green';
+                            result = 'Correct!';
+                        } else {
+                            button.style.backgroundColor = 'red';
+                            result = 'Incorrect';
+                        }
+                        if (button.classList.contains('1st')) {
+                            res1.innerHTML = result;
+                        } else if (button.classList.contains('2nd')) {
+                            res2.innerHTML = result;
+                        } else if (button.classList.contains('3rd')) {
+                            res3.innerHTML = result;
+                        }
+                    })
+                })
+            })
+
+            document.addEventListener('DOMContentLoaded', function () {
+                let form = document.querySelector('form');
+                let res4 = document.querySelector('#res4');
+                let field = document.querySelector('#text');
+                form.addEventListener('submit', function (){
+                    let answer = document.querySelector('input').value;
+                    if (answer.toLowerCase() === 'eyes'){
+                        res4.innerHTML = 'Correct!';
+                        field.style.backgroundColor = 'green';
+                    } else {
+                        res4.innerHTML = 'Incorrect';
+                        field.style.backgroundColor = 'red';
+                    }
+                    event.preventDefault()
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What does SPF in sunscreen stand for?</h3>
+                <button type="button" class="1st multiple_choice correct" >Sun Protection Factor</button>
+                <button type="button" class="1st multiple_choice">Shade Providing Factor</button>
+                <button type="button" class="1st multiple_choice">Sun Pitching Frame</button>
+                <button type="button" class="1st multiple_choice">Super Protection Force</button>
+                <p id = "res1" ></p>
+                </div>
+            <hr>
+            <div class="section">
+                <h3>The ancient Romans boiled vinegar and what else to make their version of an energy drink?</h3>
+                <button type="button" class="2nd multiple_choice">Silver Coins</button>
+                <button type="button" class="2nd multiple_choice">Fermented Lemons</button>
+                <button type="button" class="2nd multiple_choice correct">Goat Poop</button>
+                <button type="button" class="2nd multiple_choice">Berries</button>
+                <p id = "res2"></p>
+                <hr>
+            </div>
+            <div class="section">
+                <h3>How many people have walked on the moon?</h3>
+                <button type="button" class="3rd multiple_choice">4</button>
+                <button type="button" class="3rd multiple_choice">8</button>
+                <button type="button" class="3rd multiple_choice correct">12</button>
+                <button type="button" class="3rd multiple_choice">16</button>
+                <p id = "res3"></p>
+                <hr>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Which is the only body part that is fully grown from birth?</h3>
+                <form>
+                    <input id = 'text' autocomplete="off" type="text" placeholder="">
+                    <button type="submit">Check Answer</button>
+                </form>
+                <p id="res4"></p>
+            </div>
+        </div>
+    </body>
+</html>
