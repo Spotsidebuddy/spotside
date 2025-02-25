@@ -1,0 +1,44 @@
+.header {
+    text-align: center;
+    font-family: Roboto, SansSerif, sans-serif;
+    background-color: #212529;
+    color: whitesmoke;
+    height: 42pt;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+}
+
+.h2{
+    
+}
+
+#opaque1{
+    opacity: 0;
+}
+
+#opaque2{
+    opacity: 0;
+}
+
+ol li::marker{
+    font-size: 2rem;
+}
+
+.section {
+    margin-left: 42px;
+    margin-right: 14rem;
+    padding:0.5rem 2rem 1rem 2rem;
+    align: center;
+}
+
+.section:hover{
+    background-color: antiquewhite;
+    text-decoration-color: darkgreen;
+    transition: color 2s ease-in-out, background-color 1s ease-in-out;
+}
+
+a:hover{
+    color: darkgreen;
+}

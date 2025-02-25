@@ -1,5 +1,3 @@
-import sys
-
 array = list(map(int, input().split()))
 
 
